@@ -1,0 +1,54 @@
+[package]
+name = "dko-launcher"
+# Cargo package metadata only; the release version comes from the build environment.
+version = "0.0.0"
+edition = "2021"
+description = "Project KNOCKOUT launcher for Divine Knockout"
+license = "MIT"
+
+[[bin]]
+name = "dko-launcher"
+path = "src/main.rs"
+test = false
+bench = false
+
+[dependencies]
+tempfile = "3"
+anyhow = "1"
+base64 = "0.22"
+chacha20poly1305 = "0.10"
+clap = { version = "4", features = ["derive", "env"] }
+hex = "0.4"
+libc = "0.2"
+fs2 = "0.4"
+fontdue = "0.9"
+futures-util = "0.3"
+image = { version = "0.25", default-features = false, features = ["ico", "png"] }
+minifb = { version = "0.28", default-features = false, features = ["x11"] }
+rand_core = { version = "0.6", features = ["getrandom"] }
+regex = "1"
+reqwest = { version = "0.12", default-features = false, features = ["blocking", "json", "rustls-tls"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sha2 = "0.10"
+tokio-tungstenite = { version = "0.24", features = ["rustls-tls-webpki-roots"] }
+tokio = { version = "1", features = ["full"] }
+url = "2"
+walkdir = "2"
+
+[build-dependencies]
+winres = "0.1"
+
+[target.'cfg(windows)'.dependencies]
+sysinfo = "0.33"
+winreg = "0.55"
+windows-sys = { version = "0.59", features = [
+    "Win32_Foundation",
+    "Win32_Graphics_Dwm",
+    "Win32_Graphics_Gdi",
+    "Win32_Storage_FileSystem",
+    "Win32_System_LibraryLoader",
+    "Win32_UI_Controls_Dialogs",
+    "Win32_UI_Shell",
+    "Win32_UI_WindowsAndMessaging",
+] }
